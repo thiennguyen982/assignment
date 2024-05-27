@@ -78,14 +78,18 @@ def identify_numeric_column(df):
 
 def plot_numeric_column(df, numeric_column):
     plt.figure(figsize=(10, 5))
-    rootpath = f"{Path(__file__).parent}\output"
-    for col in numeric_column:
-        df[col].plot(kind='line', marker='o')
-        plt.title(f"Plot of {col}")
-        plt.xlabel('Index')
-        plt.ylabel(col)
-        plt.grid(True)
-        plt.savefig(f'{rootpath}\output_plot_{col}.png')
+    try:
+        rootpath = Path(__file__).parent / "output"
+        rootpath.mkdir(parents=True, exist_ok=True)
+        for col in numeric_column:
+            df[col].plot(kind='line', marker='o')
+            plt.title(f"Plot of {col}")
+            plt.xlabel('Index')
+            plt.ylabel(col)
+            plt.grid(True)
+            plt.savefig(f'{rootpath}\output_plot_{col}.png')
+    except Exception as e:
+        print(f"An error occurred while creating the folder: {e}")
 
 def main(url):
     html_content = fetch_wikipedia_page(url)
