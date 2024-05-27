@@ -33,6 +33,13 @@ def parse_table(table):
     return df
 
 def is_date(list_val : pd.core.series.Series):
+    """
+    Args:
+        list_val (pd.core.series.Series): pandas column to be checked if this column contains date value or not
+
+    Returns:
+        boolean: True / False
+    """
     for i in range(len(list_val)):
         try:
             parse(list_val[i])
