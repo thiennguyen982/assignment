@@ -25,7 +25,7 @@ def extract_table(html_content):
                 for sup in cell.find_all('sup'):
                     sup.decompose()
     
-    return tables  # Assumption: We're interested in the first table
+    return tables
 
 def parse_table(table):
     table_html = str(table)
@@ -40,14 +40,6 @@ def is_date(list_val : pd.core.series.Series):
         except (ValueError, TypeError):
             return False
         
-def is_valid_numeric(list_val : pd.core.series.Series):
-    pattern = r'\D\s\d+\s\D'
-    for i in range(len(list_val)):
-        match = re.search(pattern, list_val[i])
-        if not match:
-            return False
-    return True
-
 def convert_to_numeric(value):
     match = re.search(r'(\d+(\.\d+)?)', value)
     if match:
