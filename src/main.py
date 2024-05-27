@@ -83,10 +83,12 @@ def plot_numeric_column(df, numeric_column):
 
 def main(url):
     html_content = fetch_wikipedia_page(url)
-    table = extract_table(html_content)
-    df = parse_table(table)
-    numeric_column = identify_numeric_column(df)
-    plot_numeric_column(df, numeric_column)
+    tables = extract_table(html_content)
+    for i in range(len(tables)):
+        table = tables[i]
+        df = parse_table(table)
+        numeric_column = identify_numeric_column(df)
+        plot_numeric_column(df, numeric_column)
     
 if __name__ == "__main__":
     url = "https://en.wikipedia.org/wiki/Women%27s_high_jump_world_record_progression"
