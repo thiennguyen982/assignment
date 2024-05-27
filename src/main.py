@@ -13,6 +13,13 @@ def fetch_wikipedia_page(url):
     return response.text
 
 def extract_table(html_content):
+    """
+    Args:
+        html_content: html contents extract from the url
+
+    Returns:
+       table_html: html lines that contains the table class
+    """
     soup = BeautifulSoup(html_content, 'html.parser')
     tables = soup.find_all('table', {'class': 'wikitable'})
     
